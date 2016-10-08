@@ -108,7 +108,7 @@ if($_POST['register'])
 		$bucket = "newuser"; include(BOARD_ROOT."lib/pluginloader.php");
 		
 		
-		$rLogUser = Query("select id, pss, password from {users} where 1");
+		$rLogUser = Query("select id, password from {users} where 1");
 		$matches = array();
 
 		while($testuser = Fetch($rLogUser))
@@ -116,7 +116,7 @@ if($_POST['register'])
 			if($testuser['id'] == $user['id'])
 				continue;
 
-			$sha = doHash($_POST['pass'].SALT.$testuser['pss']);
+			$sha = doHash($_POST['pass'].SALT);
 			if($testuser['password'] === $sha)
 				$matches[] = $testuser['id'];
 		}
