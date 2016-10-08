@@ -42,7 +42,7 @@ elseif(isset($_POST['actionlogin']))
 
 		Report("[b]".$user['name']."[/] logged in.", 1);
 		
-		$rLogUser = Query("select id, pss, password from {users} where 1");
+		$rLogUser = Query("select id, password from {users} where 1");
 		$matches = array();
 
 		while($testuser = Fetch($rLogUser))
@@ -50,7 +50,7 @@ elseif(isset($_POST['actionlogin']))
 			if($testuser['id'] == $user['id'])
 				continue;
 
-			$sha = doHash($_POST['pass'].SALT.$testuser['pss']);
+			$sha = $_POST['pass'];
 			if($testuser['password'] === $sha)
 				$matches[] = $testuser['id'];
 		}
