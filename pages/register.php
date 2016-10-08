@@ -89,16 +89,14 @@ if($_POST['register'])
 	}
 	else
 	{
-		$newsalt = Shake();
-		$sha = doHash($_POST['pass'].SALT.$newsalt);
 		$uid = FetchResult("SELECT id+1 FROM {users} WHERE (SELECT COUNT(*) FROM {users} u2 WHERE u2.id={users}.id+1)=0 ORDER BY id ASC LIMIT 1");
 		if($uid < 1) $uid = 1;
 
-		$rUsers = Query("insert into {users} (id, name, password, pss, primarygroup, regdate, lastactivity, lastip, email, sex, theme) values ({0}, {1}, {2}, {3}, {4}, {5}, {5}, {6}, {7}, {8}, {9})", 
-			$uid, $_POST['name'], $sha, $newsalt, Settings::get('defaultGroup'), time(), $_SERVER['REMOTE_ADDR'], $_POST['email'], (int)$_POST['sex'], Settings::get("defaultTheme"));
+		$rUsers = Query("insert into {users} (id, name, password, primarygroup, regdate, lastactivity, lastip, email, sex, theme) values ({0}, {1}, {2}, {3}, {4}, {5}, {5}, {6}, {7}, {8})", 
+			$uid, $_POST['name'], $_POST['pass'], Settings::get('defaultGroup'), time(), $_SERVER['REMOTE_ADDR'], $_POST['email'], (int)$_POST['sex'], Settings::get("defaultTheme"));
 
-		//if($uid == 1)
-		//	Query("update {users} set primarygroup = {0} where id = 1", Settings::get('rootGroup'));
+		if($uid == 1)
+			Query("update {users} set primarygroup = {0} where id = 1", Settings::get('rootGroup'));
 
 		Report("New user: [b]".$_POST['name']."[/] (#".$uid.") -> [g]#HERE#?uid=".$uid);
 
