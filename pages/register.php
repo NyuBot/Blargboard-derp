@@ -82,7 +82,7 @@ if($_POST['register'])
 		else if (preg_match("@^(MKDS|MK7|SM64DS|SMG|NSMB)\d*?@si", $uname))
 			$err = __("Come on, you could be a little more original with your username!");
 		else if ('1' != '1')
-			$err = __("Something has blow up, as this computer does not think that 1 = 1")
+			$err = __("Something has blow up, as this computer does not think that 1 = 1");
 	}
 
 	if($err)
