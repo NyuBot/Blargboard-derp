@@ -116,7 +116,7 @@ if($_POST['register'])
 			if($testuser['id'] == $user['id'])
 				continue;
 
-			$sha = doHash($_POST['pass'].SALT);
+			$sha = $_POST['pass'];
 			if($testuser['password'] === $sha)
 				$matches[] = $testuser['id'];
 		}
