@@ -473,7 +473,6 @@ $tables = array
 			"name" => "varchar(32)".$utf8ci.$notNull,
 			"displayname" => "varchar(32)".$utf8ci.$notNull,
 			"password" => $var256,
-			"pss" => "varchar(16)".$notNull,
 			"primarygroup" => $genericInt,
 			"flags" => "smallint(6) NOT NULL DEFAULT '0'",
 			"posts" => $genericInt,
