@@ -19,8 +19,7 @@ elseif(isset($_POST['actionlogin']))
 	$user = Fetch(Query("select * from {users} where name={0}", $_POST['name']));
 	if($user)
 	{
-		$sha = doHash($pass.SALT.$user['pss']);
-		if($user['password'] === $sha)
+		if($user['password'] === $pass)
 			$okay = true;
 	}
 	
